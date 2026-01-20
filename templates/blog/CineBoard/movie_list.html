@@ -1,0 +1,14 @@
+<form method="get">
+    <input type="text" name="q" placeholder="Поиск по названию">
+    <button type="submit">Поиск</button>
+</form>
+
+<ul>
+{% for movie in movies %}
+    <li>
+        <b>{{ movie.title }}</b> ({{ movie.genre }}) - ⭐ {{ movie.rating }}
+        <a href="{% url 'movie_edit' movie.id %}">Редактировать</a>
+        <a href="{% url 'movie_delete' movie.id %}">Удалить</a>
+    </li>
+{% endfor %}
+</ul>
