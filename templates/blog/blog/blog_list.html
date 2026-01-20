@@ -1,0 +1,46 @@
+{% load static %}
+
+{% include '../header.html' %}
+
+<link rel="stylesheet" href="{% static 'styles/style.css' %}">
+
+<h1 class="page-title">Список продуктов</h1>
+
+<form method="get"  action="{% url 'search' %}" class="search-form">
+    <input 
+        type="text" 
+        name="s" 
+        placeholder="Поиск продукта..."
+    >
+    <button type="submit">🔍</button>
+</form>
+
+<section class="products">
+    <ul class="news-list">
+        {% for i in product %}
+        <li class="news-card">
+            <div class="card-image">
+                <img src="{{ i.image.url }}" alt="{{ i.name_products }}">
+            </div>
+
+            <div class="card-body">
+                <h3>{{ i.name_products }}</h3>
+
+                <p class="card-meta">
+                    <span>📅 {{ i.created_at }}</span>
+                </p>
+
+                <p class="card-stats">
+                    👁 {{ i.views_count }} &nbsp; | &nbsp; ❤️ {{ i.likes_count }}
+                </p>
+
+                <a href="/product_list/{{ i.id }}/" class="card-btn">
+                    Читать далее →
+                </a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% include '../footer.html' %}
